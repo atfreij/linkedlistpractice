@@ -33,13 +33,18 @@ int main() {
   current = start;
   previous = NULL;
 
+  //char conversion and increment
+  char a = 'a';
+  int int_a = a + 1;
+  a = (char)int_a;
+
   for(i=0; i < sizeof(alphabet); i++) {
-    
+     
   }
  // cout << "Hello world!\n";
   cout << "Size of malloc_alphabet: " << sizeof(*malloc_alphabet) << endl;
   cout << "Size of new_alphabet: " << sizeof(*malloc_alphabet) << endl; 
+  cout << "Int addition of 'a'+ 1 is: " << a << endl;
   return 0;
 }
 
-//main();
