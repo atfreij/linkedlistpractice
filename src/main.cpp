@@ -10,41 +10,56 @@ struct node {
   struct node *prev;
 };
 
+// Testing malloc/new syntax differences and uses
 char alphabet[5];
 
 int main() {
   int i = 0;
   int j = 0;
-  char alphabet[5] = {'a','b','c','d','e'};
+  int len = 26;
   // malloc() taken from stdlib.h, typically C-style of allocating memory
   char *malloc_alphabet = (char*) malloc(sizeof(alphabet) * sizeof(char));
   // new is cC++ memory allocation technique
   char *new_alphabet = new char[sizeof(alphabet)];
 
-  struct node *current;
-  struct node *previous;
-  //int length = 26;
+  // can current and orevious be turned into standard int pointers?
+  //struct node *current;
+  //struct node *previous;
+  int *current;
+  int *previous;
 
-  struct node *start = new node;
-  start->letter = alphabet[0];
-  start->next = NULL;
-  start->prev = NULL;
+  struct node start = new node;
+  start.letter = "A";
+  start.next = NULL;
+  start.prev = NULL;
 
   current = start;
-  previous = NULL;
+  previous = start;
 
   //char conversion and increment
   char a = 'a';
-  int int_a = a + 1;
-  a = (char)int_a;
+  int int_a = a;
 
-  for(i=0; i < sizeof(alphabet); i++) {
-     
+  for(i = 0; i < len; i++) {
+    // set previous to point to current node for it to become the previous node
+    struct node new_node = new node;
+    current = *new_node;
+    if(i != 0) {
+      int_a+=1;
+      current = new_node; 
+      //previous = 
+    }
+    current->letter = (char) int_a;
+    current = *new_node;
+    //current->prev  
   }
  // cout << "Hello world!\n";
-  cout << "Size of malloc_alphabet: " << sizeof(*malloc_alphabet) << endl;
-  cout << "Size of new_alphabet: " << sizeof(*malloc_alphabet) << endl; 
-  cout << "Int addition of 'a'+ 1 is: " << a << endl;
+  cout << "Size of malloc_alphabet: " << sizeof(malloc_alphabet) << endl;
+  cout << "Size of new_alphabet: " << sizeof(malloc_alphabet) << endl;
+  cout << "Address of malloc_alphabet: " << &malloc_alphabet << endl;
+  cout << "Address of new_alphavet: " << &new_alphabet << endl; 
+  cout << "Value of current->letter is: " << current->letter << endl;
+  //cout << "Int addition of 'a'+ 1 is: " << a << endl;
   return 0;
 }
 
