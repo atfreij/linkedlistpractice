@@ -17,6 +17,7 @@ int main() {
   int i = 0;
   int j = 0;
   int len = 26;
+  char letter = 'a';
   // malloc() taken from stdlib.h, typically C-style of allocating memory
   char *malloc_alphabet = (char*) malloc(sizeof(alphabet) * sizeof(char));
   // new is cC++ memory allocation technique
@@ -25,16 +26,18 @@ int main() {
   // can current and orevious be turned into standard int pointers?
   //struct node *current;
   //struct node *previous;
-  int *current;
-  int *previous;
+  node *head;
+  node *current;
+  node *previous;
 
-  struct node start = new node;
-  start.letter = "A";
-  start.next = NULL;
-  start.prev = NULL;
+  struct node *list = new node;
+  list->letter = letter;
+  list->next = NULL;
+  list->prev = NULL;
+  head = list;
 
-  current = start;
-  previous = start;
+  current = list;
+  previous = list;
 
   //char conversion and increment
   char a = 'a';
@@ -42,24 +45,27 @@ int main() {
 
   for(i = 0; i < len; i++) {
     // set previous to point to current node for it to become the previous node
-    struct node new_node = new node;
-    current = *new_node;
+    struct node *new_node = new node;
+    current = new_node;
     if(i != 0) {
-      int_a+=1;
-      current = new_node; 
-      //previous = 
+      int_a += 1;
+      previous = list;
+      list->next = new_node;
+      new_node->prev = list;
+      list = list->next;
+      current = list; 
     }
-    current->letter = (char) int_a;
-    current = *new_node;
+    new_node->letter = (char) int_a;
+    new_node->next = NULL;
+    new_node->prev = NULL;
+    current = new_node;
     //current->prev  
   }
  // cout << "Hello world!\n";
   cout << "Size of malloc_alphabet: " << sizeof(malloc_alphabet) << endl;
   cout << "Size of new_alphabet: " << sizeof(malloc_alphabet) << endl;
   cout << "Address of malloc_alphabet: " << &malloc_alphabet << endl;
-  cout << "Address of new_alphavet: " << &new_alphabet << endl; 
-  cout << "Value of current->letter is: " << current->letter << endl;
-  //cout << "Int addition of 'a'+ 1 is: " << a << endl;
+  cout << "Address of new_alphabet: " << &new_alphabet << endl; 
   return 0;
 }
 
